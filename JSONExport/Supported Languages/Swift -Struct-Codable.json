@@ -89,9 +89,9 @@
                      },
                      {
                      "fetchBasicTypeWithSpecialNeedsPropertyFromMap": "",
-                     "bodyStart": "{\n\t\tlet values = try decoder.container(keyedBy: CodingKeys.self)\n",                     
-                     "bodyEnd": "\t}",
-                     "fetchBasicTypePropertyFromMap": "\t\t<!VarName!> = try values.decodeIfPresent(<!VarType!>.self, forKey: .<!VarName!>)\n",
+                     "bodyStart": "{\n\t\tdo {\n\t\t\tlet values = try decoder.container(keyedBy: CodingKeys.self)\n",
+                     "bodyEnd": "\t\t} catch let DecodingError.typeMismatch(type, context) {\n\t\t\tprint(\"Type '\\(type)' mismatch:\", context.debugDescription)\n\t\t\tprint(\"codingPath:\", context.codingPath)\n\t\t} catch {\n\t\t\tprint(error)\n\t\t\tprint(error.localizedDescription)\n\t\t} \n\t}",
+                     "fetchBasicTypePropertyFromMap": "\t\t\t<!VarName!> = try values.decodeIfPresent(<!VarType!>.self, forKey: .<!VarName!>)\n",
                      "signature": "\n\tinit(from decoder: Decoder) throws ",
                      "fetchArrayOfCustomTypePropertyFromMap": "\t\t<!VarName!> = try values.decodeIfPresent(<!VarType!>.self, forKey: .<!VarName!>)\n",
                      "comment": "",
@@ -109,7 +109,7 @@
     "displayLangName": "Swift - Struct - Codable",
     "instanceVarDefinition": "\tvar <!VarName!>: <!VarType!>?\n",
     "supportsFirstLineStatement": "false",
-    "modelEnd": "\n}",
+    "modelEnd": "}",
     "staticImports": "import Foundation",
     "langName": "Swift"
 }
